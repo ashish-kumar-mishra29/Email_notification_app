@@ -1,16 +1,4 @@
-<!-- <form [formGroup]="FormData" (ngSubmit)="send()">
-    <label for="name">Name:</label>
-    <input type="text" id="name" formControlName="from_name" />
-    <label for="email">Email Address:</label>
-    <input type="email" id="email" formControlName="from_email" />
-    <label for="subject">Subject: </label>
-    <input type="text" id="subject" formControlName="Subject" />
-    <label for="body">Email Body:</label>
-    <textarea id="body" formControlName="message"></textarea>
-    
-    <button type="submit">Send Email</button>
-</form>
-  -->
+
 <div class="body">
   <section class="container">
     <header>Registration Form</header>
@@ -19,7 +7,7 @@
         <label>Full Name</label>
         <input type="text" placeholder="Enter full name"  formControlName="to_name"/>
       </div>
-      @if(FormData.controls['to_name'].dirty && FormData.hasError('required','to_name')){
+      @if((FormData.controls['to_name'].dirty || FormData.controls['to_name'].touched) && FormData.hasError('required','to_name')){
         <small>*Name is required</small>
       }
       
@@ -27,7 +15,7 @@
         <label>Email Address</label>
         <input type="text" placeholder="Enter email address"  formControlName="to_email"/>
       </div>
-      @if(FormData.controls['to_email'].dirty && FormData.hasError('required')){
+      @if((FormData.controls['to_email'].dirty || FormData.controls['to_email'].touched) && FormData.hasError('required','to_email')){
         <small>*Email is required</small>
       }
       <div class="column">
@@ -36,7 +24,7 @@
           <input type="number" placeholder="Enter phone number"  formControlName="number"/>
         </div>
       </div>
-      @if(FormData.controls['number'].dirty && FormData.hasError('required','number')){
+      @if((FormData.controls['number'].dirty || FormData.controls['number'].touched)  && FormData.hasError('required','number')){
         <small>*Number is required</small>
       }
       <div class="column">
@@ -45,7 +33,7 @@
           <input type="password" placeholder="Enter Password"  formControlName="password"/>
         </div>
       </div>
-      @if(FormData.controls['password'].dirty && FormData.hasError('required','password')){
+      @if((FormData.controls['password'].dirty || FormData.controls['password'].touched) && FormData.hasError('required','password')){
         <small>*Password is required</small>
       }
       

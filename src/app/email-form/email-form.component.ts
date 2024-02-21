@@ -10,6 +10,9 @@ import emailjs from '@emailjs/browser'
   styleUrl: './email-form.component.css'
 })
 export class EmailFormComponent {
+
+  signUpUsers: any[] = [];
+
   FormData = new FormGroup({
     to_name:new FormControl('', [Validators.required]),
     to_email:new FormControl('', [Validators.required, Validators.email]),
@@ -18,11 +21,23 @@ export class EmailFormComponent {
     
   })
   async send(){
-    emailjs.init('fGa105Uwf8SbctAxG')
-    let response = await emailjs.send("service_glc490q","template_44di156",{
-      to_name: this.FormData.value.to_name,
-      to_email: this.FormData.value.to_email,
-      });
+      // Retrieve existing data from local storage
+  const existingUsers = JSON.parse(localStorage.getItem('signUpUser') || '[]');
+
+  // Push the new user data
+  existingUsers.push(this.FormData.value);
+
+  // Store the updated array back into local storage
+  localStorage.setItem('signUpUser', JSON.stringify(existingUsers));
+
+  // Reset the form
+  this.FormData.reset();
+    // emailjs.init('fGa105Uwf8SbctAxG')
+    // let response = await emailjs.send("service_glc490q","template_44di156",{
+    //   to_name: this.FormData.value.to_name,
+    //   to_email: this.FormData.value.to_email,
+    //   });
+     
   alert('Successfully registered');
   this.FormData.reset();
   }
@@ -32,6 +47,8 @@ export class EmailFormComponent {
       window.location.href = '/login';
   }, 3000);
   }
+  
+
 }
 
 

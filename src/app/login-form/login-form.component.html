@@ -1,20 +1,26 @@
 <div class="body">
-    <div class="wrapper">
-      <form>
-        <h2>Login</h2>
-          <div class="input-field">
-          <input type="text" required>
-          <label>Enter your email</label>
+  <section class="container">
+    <header>Registration Form</header>
+    <form class="form"[formGroup]="data" (ngSubmit)="send()">
+      <div class="input-box">
+        <label>Email Address</label>
+        <input type="text" name="to_email" placeholder="Enter email address"  formControlName="to_email"/>
+      </div>
+      @if((data.controls['to_email'].dirty || data.controls['to_email'].touched) && data.hasError('required','to_email')){
+        <small>*Email is required</small>
+      }
+     
+      <div class="column">
+        <div class="input-box">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter Password"  formControlName="password"/>
         </div>
-        <div class="input-field">
-          <input type="password" required>
-          <label>Enter your password</label>
-        </div>
-        <div class="forget">
-          <a href="#">Forgot password?</a>
-        </div>
-        <button type="submit">Log In</button>
-        
-      </form>
-    </div>
+      </div>
+      @if((data.controls['password'].dirty || data.controls['password'].touched) && data.hasError('required','password')){
+        <small>*Password is required</small>
+      }
+      
+      <button type="submit" [disabled]="!data.valid" (click)="onLogIn()">Register</button>
+    </form>
+  </section>
 </div>
